@@ -37,25 +37,34 @@ const config = {
             {
                 test: /\.scss$/, 
                 use: [
-                  'style-loader',
-                  'css-loader', 
-                  'sass-loader',
+                    'style-loader',
+                    'css-loader', 
+                    'sass-loader',
                 ],
-              },
+            },
 
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],
     },
+    ignoreWarnings: [
+        {
+            module: /module2\.js\?[34]/, // A RegExp
+        },
+        {
+            module: /[13]/,
+            message: /homepage/,
+        },
+        /warning from compiler/,
+        (warning) => true,
+    ],
 };
 
-module.exports = () => {
-    if (isProduction) {
-        config.mode = 'production';
-        
-        
-    } else {
-        config.mode = 'development';
-    }
-    return config;
-};
+// Динамическое назначение режима
+if (isProduction) {
+    config.mode = 'production';
+} else {
+    config.mode = 'development';
+}
+
+module.exports = config;

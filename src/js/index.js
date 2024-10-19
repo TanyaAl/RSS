@@ -1,5 +1,5 @@
-// import '../scss/styles.scss'
-// import'bootstrap';
+import '../scss/styles.scss'
+import'bootstrap';
 // import * as yup from 'yup';
 // import _ from 'lodash';
 // import onChange from 'on-change';
