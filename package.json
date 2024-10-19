@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "RSS",
-  "main": "src/js/index.js",
+  "main": "./src/js/index.js",
   "scripts": {
     "start": "webpack serve --mode development",
     "test": "echo \"No tests available yet\"",
