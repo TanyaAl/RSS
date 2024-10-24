@@ -1,0 +1,9 @@
+ {
+    "translation": {
+      "validation": {
+        "requiredField": "Please fill out this field",
+        "correctURL": "Invalid RSS URL. Please check the format and try again",
+        "doubleUrl": "This RSS feed has already been added"
+      }
+    }
+  }

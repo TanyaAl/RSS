@@ -1,23 +1,22 @@
 import $ from 'jquery';
 
-const initView = (watchedState, path, value) => {
-    const ul = $('.list-group');
+const initView = (watchedState, path, value, elements) => {
+  // console.log('path', path);
+  // console.log('errors', watchedState.errors);
     switch (path) {
       case 'rssForm.currentFeed':
         if (Object.keys(watchedState.errors).length !== 0) {
           $('.form-control').addClass('is-invalid');
-          $('.invalid-feedback').remove();
-          const feedback = document.querySelector('.feedback');
-          feedback.textContent = watchedState.errors.input;
+          elements.feedback.textContent = watchedState.errors.input;
         } else {
           $('.form-control').removeClass('is-invalid');
-          feedback.textContent = '';
+          elements.feedback.textContent = '';
         }
         break;
-      case 'rssForm.feeds':
-        feedback.textContent = '';
-        if (watchedState.rssForm.stateForm === 'valid') {
-
+      case 'rssForm.stateForm':
+        if (value = 'valid') {
+          $('.form-control').removeClass('is-invalid');
+          elements.feedback.textContent = '';
         }
         break;
       default:
