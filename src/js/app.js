@@ -33,11 +33,11 @@ const app = () => {
 
     yup.setLocale({
         string: {
-            required: () => i18n.t('validation.requiredField'),
             url: () => i18n.t('validation.correctURL'),
         },
         mixed: {
-            notOneOf: (params) => i18n.t('validation.doubleUrl')
+            required: () => i18n.t('validation.requiredField'),
+            notOneOf: () => i18n.t('validation.doubleUrl')
         }
     });
 
