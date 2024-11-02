@@ -7,4 +7,4 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/e351f965a687312eb456/maintainability)](https://codeclimate.com/github/TanyaAl/RSS/maintainability)
 
-[link](https://rss-ib5m-l915dr9ay-tatianas-projects-7c79dfd1.vercel.app/)
+[link]([https://rss-ib5m-l915dr9ay-tatianas-projects-7c79dfd1.vercel.app/](https://rss-blktku5hj-tatianas-projects-7c79dfd1.vercel.app/))
