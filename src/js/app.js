@@ -4,6 +4,7 @@ import i18next from 'i18next';
 import onChange from 'on-change';
 import en from '../locales/en.json';
 import initView from './view';
+import axios from 'axios';
 
 const app = () => {
   const state = {
@@ -54,7 +55,6 @@ const app = () => {
     .catch((err) => {
       const errors = {};
       err.inner.forEach((error) => {
-        // console.log('message',error.message)
         errors[error.path] = error.message;
       });
       return errors;
@@ -80,9 +80,15 @@ const app = () => {
     validate(watchedState.rssForm.currentFeed).then((errors) => {
       watchedState.errors = errors;
       if (state.rssForm.stateForm === 'valid') {
-        watchedState.rssForm.feeds.push(watchedState.rssForm.currentFeed);
-        elements.form.reset();
-        elements.field.focus();
+        try {
+          axios.post(watchedState.rssForm.currentFeed, )
+          watchedState.rssForm.feeds.push(watchedState.rssForm.currentFeed);
+          elements.form.reset();
+          elements.field.focus();
+        
+        } catch (error) {
+          
+        }
       }
       elements.submit.disabled = false;
     });
