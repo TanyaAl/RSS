@@ -5,6 +5,7 @@ import onChange from 'on-change';
 import en from '../locales/en.json';
 import initView from './view';
 import axios from 'axios';
+import { getAllOriginsUrl, parseRSS } from '../utils/parser';
 
 const app = () => {
   const state = {
@@ -77,20 +78,33 @@ const app = () => {
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
     elements.submit.disabled = true;
+    console.log('IM HERE')
     validate(watchedState.rssForm.currentFeed).then((errors) => {
       watchedState.errors = errors;
-      if (state.rssForm.stateForm === 'valid') {
-        try {
-          axios.post(watchedState.rssForm.currentFeed, )
-          watchedState.rssForm.feeds.push(watchedState.rssForm.currentFeed);
+      watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
+      if (watchedState.rssForm.stateForm !== 'valid') {
+        elements.submit.disabled = false;
+        return;
+      }
+        const feedUrl = watchedState.rssForm.currentFeed.input;
+        const proxyUrl = getAllOriginsUrl(feedUrl);
+
+        axios.get(proxyUrl)
+        .then((response) => {
+          const { contents } = response.data;
+          const parsedFeed = parseRSS(contents);
+
+          watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed});
+          console.log('HEEEEEEEEEY');
           elements.form.reset();
           elements.field.focus();
-        
-        } catch (error) {
-          
-        }
-      }
-      elements.submit.disabled = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          elements.submit.disabled = false;
+        })
     });
   });
 };
