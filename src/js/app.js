@@ -2,10 +2,12 @@ import * as yup from 'yup';
 import _ from 'lodash';
 import i18next from 'i18next';
 import onChange from 'on-change';
+import axios from 'axios';
 import en from '../locales/en.json';
 import initView from './view';
-import axios from 'axios';
 import { getAllOriginsUrl, parseRSS } from '../utils/parser';
+import renderFeeds from '../renders/renderFeeds';
+import renderPosts from '../renders/renderPosts';
 
 const app = () => {
   const state = {
@@ -22,6 +24,8 @@ const app = () => {
     field: document.getElementById('url-input'),
     submit: document.getElementById('rss-submit'),
     feedback: document.querySelector('.feedback'),
+    posts: document.querySelector('.posts'),
+    feeds: document.querySelector('.feeds'),
   };
 
   const i18n = i18next.createInstance();
@@ -78,24 +82,29 @@ const app = () => {
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
     elements.submit.disabled = true;
-    console.log('IM HERE')
     validate(watchedState.rssForm.currentFeed).then((errors) => {
       watchedState.errors = errors;
       watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
+      console.log(watchedState.errors)
       if (watchedState.rssForm.stateForm !== 'valid') {
+        console.log('IM HERE');
         elements.submit.disabled = false;
         return;
       }
-        const feedUrl = watchedState.rssForm.currentFeed.input;
-        const proxyUrl = getAllOriginsUrl(feedUrl);
+      const feedUrl = watchedState.rssForm.currentFeed.input;
+      const proxyUrl = getAllOriginsUrl(feedUrl);
+      
+      axios.get(proxyUrl)
+      .then((response) => {
+        const { contents } = response.data;
+        const parsedFeed = parseRSS(contents);
 
-        axios.get(proxyUrl)
-        .then((response) => {
-          const { contents } = response.data;
-          const parsedFeed = parseRSS(contents);
-
-          watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed});
+          watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
           console.log('HEEEEEEEEEY');
+          console.log(watchedState.rssForm.feeds);
+          renderFeeds(watchedState.rssForm.feeds, elements);
+          renderPosts(watchedState.rssForm.feeds, elements);
+          
           elements.form.reset();
           elements.field.focus();
         })
@@ -104,7 +113,7 @@ const app = () => {
         })
         .finally(() => {
           elements.submit.disabled = false;
-        })
+        });
     });
   });
 };
