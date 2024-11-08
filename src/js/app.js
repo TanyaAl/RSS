@@ -81,6 +81,7 @@ const app = () => {
 
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
+    console.log('Submit start');
     elements.submit.disabled = true;
     validate(watchedState.rssForm.currentFeed).then((errors) => {
       watchedState.errors = errors;
