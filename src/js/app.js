@@ -85,10 +85,9 @@ const app = () => {
     elements.submit.disabled = true;
     validate(watchedState.rssForm.currentFeed).then((errors) => {
       watchedState.errors = errors;
-      watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
-      console.log(watchedState.errors)
+      // console.log('errors', watchedState.errors)
       if (watchedState.rssForm.stateForm !== 'valid') {
-        console.log('IM HERE');
+        // console.log('IM HERE');
         elements.submit.disabled = false;
         return;
       }
@@ -101,10 +100,11 @@ const app = () => {
         const parsedFeed = parseRSS(contents);
 
           watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
-          console.log('HEEEEEEEEEY');
-          console.log(watchedState.rssForm.feeds);
+          // console.log('currentfeed', watchedState.rssForm.currentFeed);
+          // console.log('HEEEEEEEEEY');
+          // console.log(watchedState.rssForm.feeds);
           renderFeeds(watchedState.rssForm.feeds, elements);
-          renderPosts(watchedState.rssForm.feeds, elements);
+          // renderPosts(watchedState.rssForm.feeds, elements);
           
           elements.form.reset();
           elements.field.focus();
@@ -115,7 +115,7 @@ const app = () => {
         .finally(() => {
           elements.submit.disabled = false;
         });
-    });
+      });
   });
 };
 

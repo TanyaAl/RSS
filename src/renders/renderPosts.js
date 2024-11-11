@@ -1,5 +1,6 @@
 const renderPosts = (data, elements) => {
     const posts = elements.posts;
+    console.log(posts)
     const items = data[0].items;
     items.map((post) => {
         const p = document.createElement('p');

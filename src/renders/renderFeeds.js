@@ -1,5 +1,6 @@
 const renderFeeds = (data, elements) => {
     const feeds = elements.feeds;
+    console.log(feeds)
     const p = document.createElement('p');
     const h2 = document.createElement('h2');
     h2.textContent = data[0].title;
