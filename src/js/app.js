@@ -2,12 +2,13 @@ import * as yup from 'yup';
 import _ from 'lodash';
 import i18next from 'i18next';
 import onChange from 'on-change';
-import axios from 'axios';
+// import axios from 'axios';
 import en from '../locales/en.json';
 import initView from './view';
-import { getAllOriginsUrl, parseRSS } from '../utils/parser';
-import renderFeeds from '../renders/renderFeeds';
-import renderPosts from '../renders/renderPosts';
+// import { getAllOriginsUrl, parseRSS } from '../utils/parser';
+// import renderFeeds from '../renders/renderFeeds';
+// import renderPosts from '../renders/renderPosts';
+import getData from '../utils/axios';
 
 const app = () => {
   const state = {
@@ -81,39 +82,38 @@ const app = () => {
 
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log('Submit start');
+    // console.log('Submit start');
     elements.submit.disabled = true;
     validate(watchedState.rssForm.currentFeed).then((errors) => {
       watchedState.errors = errors;
-      // console.log('errors', watchedState.errors)
       if (watchedState.rssForm.stateForm !== 'valid') {
-        // console.log('IM HERE');
         elements.submit.disabled = false;
         return;
       }
-      const feedUrl = watchedState.rssForm.currentFeed.input;
-      const proxyUrl = getAllOriginsUrl(feedUrl);
-      
-      axios.get(proxyUrl)
-      .then((response) => {
-        const { contents } = response.data;
-        const parsedFeed = parseRSS(contents);
+      getData(watchedState, elements);
+      // const feedUrl = watchedState.rssForm.currentFeed.input;
+      // const proxyUrl = getAllOriginsUrl(feedUrl);
 
-          watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
-          renderFeeds(watchedState.rssForm.feeds, elements);
-          renderPosts(watchedState.rssForm.feeds, elements);
-          console.log('feeds', state.rssForm.feeds);
-          
-          elements.form.reset();
-          elements.field.focus();
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          elements.submit.disabled = false;
-        });
-      });
+      // axios.get(proxyUrl)
+      // .then((response) => {
+      //   const { contents } = response.data;
+      //   const parsedFeed = parseRSS(contents);
+
+      //     watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
+      //     renderFeeds(watchedState.rssForm.feeds, elements);
+      //     renderPosts(watchedState.rssForm.feeds, elements);
+      //     console.log('feeds', state.rssForm.feeds);
+
+      //     elements.form.reset();
+      //     elements.field.focus();
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   })
+      //   .finally(() => {
+      //     elements.submit.disabled = false;
+      //   });
+    });
   });
 };
 

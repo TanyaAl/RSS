@@ -27,7 +27,7 @@ const parseRSS = (data) => {
       link: item.querySelector('link').textContent,
     })),
   };
-  console.log('feed', feed);
+  // console.log('feed', feed);
   return feed;
 };
 
