@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <title>Hexlet Frontend Project</title>
-    <script defer="defer" src="main.js"></script>
-    <link href="main.css" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column min-vh-100" data-new-gr-c-s-check-loaded="14.1201.0" data-gr-ext-installed="">
@@ -41,15 +39,29 @@
                                     class="h-100 btn btn-lg btn-primary px-sm-5">Add</button></div>
                         </div>
                     </form>
-                    <p class="mt-2 mb-0 text-muted">Example: https://lorem-rss.hexlet.app/feed</p>
+                    <p class="mt-2 mb-0 text-secondary">Example: https://lorem-rss.hexlet.app/feed</p>
                     <p class="feedback m-0 position-absolute small text-danger"></p>
                 </div>
             </div>
         </section>
         <section class="container-fluid container-xxl p-5">
             <div class="row">
-                <div class="col-md-10 col-lg-8 order-1 mx-auto posts"><h1 class="title text-white">Posts</h1></div>
-                <div class="col-md-10 col-lg-4 mx-auto order-0 order-lg-1 feeds"><h1 class="title text-white">Feeds</h1></div>
+                <div class="col-md-10 col-lg-8 order-1 mx-auto posts">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <div class="card-title"><h2 class="title text-white">Posts</h2></div>
+                        </div>
+                        <ul class="ul-posts list-group"></ul>
+                    </div>
+                </div>
+                <div class="col-md-10 col-lg-4 mx-auto order-0 order-lg-1 feeds">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <div class="text-start"><h2 class="title text-white">Feeds</h2></div>
+                        </div>
+                        <ul class="ul-feeds list-group"></ul>
+                    </div>
+                </div>
             </div>
         </section>
     </main>

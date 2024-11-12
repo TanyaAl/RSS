@@ -100,11 +100,9 @@ const app = () => {
         const parsedFeed = parseRSS(contents);
 
           watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
-          // console.log('currentfeed', watchedState.rssForm.currentFeed);
-          // console.log('HEEEEEEEEEY');
-          // console.log(watchedState.rssForm.feeds);
           renderFeeds(watchedState.rssForm.feeds, elements);
-          // renderPosts(watchedState.rssForm.feeds, elements);
+          renderPosts(watchedState.rssForm.feeds, elements);
+          console.log('feeds', state.rssForm.feeds);
           
           elements.form.reset();
           elements.field.focus();

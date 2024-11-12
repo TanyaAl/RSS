@@ -1,15 +1,18 @@
 const renderPosts = (data, elements) => {
     const posts = elements.posts;
     console.log(posts)
-    const items = data[0].items;
+    const items = data[data.length - 1].items;
     items.map((post) => {
-        const p = document.createElement('p');
+        const ul = document.querySelector('.ul-posts');
+        const li = document.createElement('li');
+        li.classList.add('list-group-item', 'border-0');
         const link = document.createElement('a');
         link.textContent = post.title;
         link.setAttribute('href', '#');
-        p.append(link);
-        posts.append(p);
-        console.log(posts)
+        li.append(link);
+        ul.prepend(li);
+        // posts.prepend(ul);
+        // console.log(posts)
     })
 };
 

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const getAllOriginsUrl = (url) => {
   const allOriginsEndpoint = 'https://allorigins.hexlet.app/get';
   return `${allOriginsEndpoint}?disableCache=true&url=${encodeURIComponent(url)}`;
@@ -16,6 +18,7 @@ const parseRSS = (data) => {
   const items = channel.querySelectorAll('item');
 
   const feed = {
+    id: _.uniqueId(),
     title: channel.querySelector('title').textContent,
     description: channel.querySelector('description').textContent,
     items: [...items].map((item) => ({
@@ -24,7 +27,7 @@ const parseRSS = (data) => {
       link: item.querySelector('link').textContent,
     })),
   };
-  console.log('feed', feed.items);
+  console.log('feed', feed);
   return feed;
 };
 
