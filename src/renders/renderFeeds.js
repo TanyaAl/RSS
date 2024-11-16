@@ -1,5 +1,5 @@
 const renderFeeds = (data) => {
-//   console.log('data', data);
+  console.log('data', data);
   const ul = document.querySelector('.ul-feeds');
   const li = document.createElement('li');
   li.classList.add('list-group-item', 'border-0');

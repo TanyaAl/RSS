@@ -11,10 +11,17 @@ const getData = (watchedState, elements) => {
     .then((response) => {
       const { contents } = response.data;
       const parsedFeed = parseRSS(contents);
-
+      console.log('before', watchedState.rssForm.feeds)
+      const actualFeeds = watchedState.rssForm.feeds;
+      console.log('actual', actualFeeds);
+      const newFeed = { url: feedUrl, ...parsedFeed };
+      console.log('new', newFeed.url);
+      const exists = actualFeeds.some(obj => obj.url === newFeed.url);
+      console.log('exists', exists);
       watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
-      renderFeeds(watchedState.rssForm.feeds, elements);
+      console.log('after', watchedState.rssForm.feeds)
       renderPosts(watchedState.rssForm.feeds, elements);
+      renderFeeds(watchedState.rssForm.feeds, elements);
 
       elements.form.reset();
       elements.field.focus();
@@ -25,7 +32,7 @@ const getData = (watchedState, elements) => {
     .finally(() => {
       elements.submit.disabled = false;
     });
-  setTimeout(() => getData(watchedState, elements), 5000);
+  // setTimeout(() => getData(watchedState, elements), 5000);
 };
 
 export default getData;

@@ -82,7 +82,6 @@ const app = () => {
 
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
-    // console.log('Submit start');
     elements.submit.disabled = true;
     validate(watchedState.rssForm.currentFeed).then((errors) => {
       watchedState.errors = errors;
@@ -91,28 +90,6 @@ const app = () => {
         return;
       }
       getData(watchedState, elements);
-      // const feedUrl = watchedState.rssForm.currentFeed.input;
-      // const proxyUrl = getAllOriginsUrl(feedUrl);
-
-      // axios.get(proxyUrl)
-      // .then((response) => {
-      //   const { contents } = response.data;
-      //   const parsedFeed = parseRSS(contents);
-
-      //     watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
-      //     renderFeeds(watchedState.rssForm.feeds, elements);
-      //     renderPosts(watchedState.rssForm.feeds, elements);
-      //     console.log('feeds', state.rssForm.feeds);
-
-      //     elements.form.reset();
-      //     elements.field.focus();
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   })
-      //   .finally(() => {
-      //     elements.submit.disabled = false;
-      //   });
     });
   });
 };
