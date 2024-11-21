@@ -1,6 +1,6 @@
 const renderPosts = (data) => {
 //   const { posts } = elements;
-//   console.log(posts);
+  // console.log(data);
   const { items } = data[data.length - 1];
   items.map((post) => {
     const ul = document.querySelector('.ul-posts');
