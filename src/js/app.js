@@ -25,7 +25,7 @@ const app = () => {
     field: document.getElementById('url-input'),
     submit: document.getElementById('rss-submit'),
     feedback: document.querySelector('.feedback'),
-    posts: document.querySelector('.posts'),
+    posts: document.querySelector('.list-group-item'),
     feeds: document.querySelector('.feeds'),
   };
 

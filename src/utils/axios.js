@@ -50,7 +50,7 @@ const getData = (watchedState, elements) => {
     .finally(() => {
       elements.submit.disabled = false;
     });
-  setTimeout(() => getData(watchedState, elements), 5000);
+  // setTimeout(() => getData(watchedState, elements), 5000);
 };
 
 export default getData;

@@ -1,5 +1,5 @@
 const renderFeeds = (data) => {
-  // console.log('data', data);
+  console.log('data', data);
   const ul = document.querySelector('.ul-feeds');
   const li = document.createElement('li');
   li.classList.add('list-group-item', 'border-0');
@@ -12,7 +12,7 @@ const renderFeeds = (data) => {
   // feeds.prepend(ul);
   const titles = document.querySelectorAll('.title');
   titles.forEach((title) => title.classList.replace('text-white', 'text-black'));
-//   console.log(elements.feeds);
+  // console.log(elements.feeds);
 };
 
 export default renderFeeds;
