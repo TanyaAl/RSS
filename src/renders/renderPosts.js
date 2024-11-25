@@ -1,27 +1,33 @@
+import renderModal from "./renderModal";
+
 const renderPosts = (data, elements) => {
   const ul = document.querySelector('.ul-posts');
   const oldPosts = Array.from(elements.posts);
   data.forEach((obj) => {
-    console.log(oldPosts);
+    // console.log(oldPosts);
     obj.items.forEach((post) => {
       // console.log('post', post);
       const exists = oldPosts.some((object) => object.title === post.title);
       if (!exists) {
-        console.log(!exists);
+        // console.log(!exists);
         const li = document.createElement('li');
-        li.classList.add('list-group-item', 'border-0', 'post');
+        li.classList.add('list-group-item', 'border-0', 'post','d-flex','justify-content-between', 'align-items-start', 'border-end-0');
         li.setAttribute('title', post.title);
         const link = document.createElement('a');
         link.textContent = post.title;
+        link.classList.add('text-wrap', 'flex-grow-1', 'fw-bold');
         link.setAttribute('href', '#');
         li.append(link);
+        const button = document.createElement('button');
+        button.classList.add('btn', 'view-button','btn-outline-primary', 'm-1', 'border-primary', 'position-relative', 'bottom-0', 'end-0');
+        button.textContent = 'View';
+        button.addEventListener('click', (e) => {
+          renderModal(e);
+          console.log('renderModal done');
+      });
+        li.append(button);
         ul.prepend(li);
-        const divForButton = document.createElement('div');
-        divForButton.innerHTML = `<button type="button" class="btn btn-outline-primary border-primary position-absolute bottom-0 end-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  View
-</button>`;
-        li.prepend(divForButton);
-        console.log(obj.items);
+        // console.log(obj.items);
       }
     });
   });

@@ -31,7 +31,7 @@ const app = () => {
     },
     feeds: document.querySelector('.feeds'),
   };
-
+  
   const i18n = i18next.createInstance();
   i18n.init({
     lng: 'en',
@@ -95,6 +95,7 @@ const app = () => {
       getData(watchedState, elements);
     });
   });
+
 };
 
 export default app;
