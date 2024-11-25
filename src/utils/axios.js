@@ -12,35 +12,23 @@ const getData = (watchedState, elements) => {
     .then((response) => {
       const { contents } = response.data;
       const parsedFeed = parseRSS(contents);
-      // console.log('before', watchedState.rssForm.feeds)
       const actualFeeds = watchedState.rssForm.feeds;
-      // console.log('actual', actualFeeds);
       const newFeed = { url: feedUrl, ...parsedFeed };
-      // console.log('new', newFeed.url);
       const exists = actualFeeds.some((obj) => obj.url === newFeed.url);
-      // console.log('exists', exists);
-
       const items = actualFeeds.some((obj) => _.isEqual(obj.items, newFeed.items));
-      // console.log(items)
-
       if (!exists) {
         watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
         renderPosts(watchedState.rssForm.feeds, elements);
-        renderFeeds(watchedState.rssForm.feeds, elements);
+        renderFeeds(watchedState.rssForm.feeds);
       }
       if (exists && !items) {
         const newItems = watchedState.rssForm.feeds.find((obj) => obj.url === newFeed.url);
-        console.log('newItems', newItems);
         newItems.items = [...newItems.items, ...newFeed.items
           .filter(((newItem) => !newItems.items.some(
             (oldItem) => oldItem.link === newItem.link,
           )))];
-
         renderPosts(watchedState.rssForm.feeds, elements);
       }
-
-      console.log('after', watchedState.rssForm.feeds);
-
       elements.form.reset();
       elements.field.focus();
     })
@@ -50,7 +38,8 @@ const getData = (watchedState, elements) => {
     .finally(() => {
       elements.submit.disabled = false;
     });
-  // setTimeout(() => getData(watchedState, elements), 5000);
+  setTimeout(() => getData(watchedState, elements), 5000);
+  console.log('timeout done');
 };
 
 export default getData;
