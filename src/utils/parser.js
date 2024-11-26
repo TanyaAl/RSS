@@ -18,10 +18,10 @@ const parseRSS = (data) => {
   const items = channel.querySelectorAll('item');
 
   const feed = {
-    id: _.uniqueId(),
     title: channel.querySelector('title').textContent,
     description: channel.querySelector('description').textContent,
     items: [...items].map((item) => ({
+      id: _.uniqueId(),
       title: item.querySelector('title').textContent,
       description: item.querySelector('description').textContent,
       link: item.querySelector('link').textContent,

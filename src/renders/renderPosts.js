@@ -1,10 +1,9 @@
 import renderModal from "./renderModal";
-
 const renderPosts = (data, elements) => {
   const ul = document.querySelector('.ul-posts');
   const oldPosts = Array.from(elements.posts);
   data.forEach((obj) => {
-    // console.log(oldPosts);
+    // console.log(obj);
     obj.items.forEach((post) => {
       // console.log('post', post);
       const exists = oldPosts.some((object) => object.title === post.title);
@@ -18,11 +17,12 @@ const renderPosts = (data, elements) => {
         link.classList.add('text-wrap', 'flex-grow-1', 'fw-bold');
         link.setAttribute('href', '#');
         li.append(link);
+        li.setAttribute('id', post.id);
         const button = document.createElement('button');
         button.classList.add('btn', 'view-button','btn-outline-primary', 'm-1', 'border-primary', 'position-relative', 'bottom-0', 'end-0');
         button.textContent = 'View';
         button.addEventListener('click', (e) => {
-          renderModal(e);
+          renderModal(post, e);
           console.log('renderModal done');
       });
         li.append(button);
