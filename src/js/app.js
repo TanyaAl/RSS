@@ -1,8 +1,7 @@
 import * as yup from 'yup';
 import _ from 'lodash';
-import i18next from 'i18next';
+import i18n from '../locales/init';
 import onChange from 'on-change';
-import ru from '../locales/ru.json';
 import initView from './view';
 import getData from '../utils/axios';
 
@@ -26,15 +25,6 @@ const app = () => {
     },
     feeds: document.querySelector('.feeds'),
   };
-
-  const i18n = i18next.createInstance();
-  i18n.init({
-    lng: 'ru',
-    debug: true,
-    resources: {
-      ru,
-    },
-  });
 
   yup.setLocale({
     string: {

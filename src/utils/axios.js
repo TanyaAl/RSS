@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
-import i18next from 'i18next';
+import i18n from '../locales/init';
 import { getAllOriginsUrl, parseRSS } from './parser';
 import renderFeeds from '../renders/renderFeeds';
 import renderPosts from '../renders/renderPosts';
@@ -34,7 +34,7 @@ const getData = (watchedState, elements) => {
       elements.field.focus();
     })
     .catch(() => {
-      watchedState.errors = i18next.t('validation.network');
+      watchedState.errors = i18n.t('validation.network');
     })
     .finally(() => {
       elements.submit.disabled = false;

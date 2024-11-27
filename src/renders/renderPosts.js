@@ -1,4 +1,5 @@
 import renderModal from './renderModal';
+import i18n from '../locales/init';
 
 const renderPosts = (data, elements) => {
   const ul = document.querySelector('.ul-posts');
@@ -24,7 +25,7 @@ const renderPosts = (data, elements) => {
         button.textContent = 'View';
         button.addEventListener('click', (e) => {
           renderModal(post, e);
-          console.log('renderModal done');
+          // console.log('renderModal done');
         });
         li.append(button);
         ul.prepend(li);
@@ -32,5 +33,7 @@ const renderPosts = (data, elements) => {
       }
     });
   });
+  elements.feedback.classList.replace('text-danger', 'text-success')
+  elements.feedback.textContent = i18n.t('validation.success');
 };
 export default renderPosts;
