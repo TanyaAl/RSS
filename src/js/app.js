@@ -2,12 +2,8 @@ import * as yup from 'yup';
 import _ from 'lodash';
 import i18next from 'i18next';
 import onChange from 'on-change';
-// import axios from 'axios';
 import en from '../locales/en.json';
 import initView from './view';
-// import { getAllOriginsUrl, parseRSS } from '../utils/parser';
-// import renderFeeds from '../renders/renderFeeds';
-// import renderPosts from '../renders/renderPosts';
 import getData from '../utils/axios';
 
 const app = () => {
@@ -25,7 +21,6 @@ const app = () => {
     field: document.getElementById('url-input'),
     submit: document.getElementById('rss-submit'),
     feedback: document.querySelector('.feedback'),
-    // posts: document.getElementsByClassName('.post'),
     get posts() {
       return document.querySelectorAll('.post');
     },
