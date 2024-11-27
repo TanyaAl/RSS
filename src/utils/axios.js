@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+import i18next from 'i18next';
 import { getAllOriginsUrl, parseRSS } from './parser';
 import renderFeeds from '../renders/renderFeeds';
 import renderPosts from '../renders/renderPosts';
@@ -32,14 +33,14 @@ const getData = (watchedState, elements) => {
       elements.form.reset();
       elements.field.focus();
     })
-    .catch((error) => {
-      console.error(error);
+    .catch(() => {
+      watchedState.errors = i18next.t('validation.network');
     })
     .finally(() => {
       elements.submit.disabled = false;
     });
-  // setTimeout(() => getData(watchedState, elements), 5000);
-  console.log('timeout done');
+  setTimeout(() => getData(watchedState, elements), 5000);
+  // console.log('timeout done');
 };
 
 export default getData;
