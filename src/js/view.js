@@ -1,12 +1,12 @@
 import $ from 'jquery';
 
 const initView = (watchedState, path, value, elements) => {
-  // console.log('path', path);
-  // console.log('errors', watchedState.errors);
   switch (path) {
     case 'rssForm.currentFeed':
       if (Object.keys(watchedState.errors).length !== 0) {
+        console.log('view', watchedState.errors);
         $('.form-control').addClass('is-invalid');
+        elements.feedback.classList.replace('text-success', 'text-danger');
         elements.feedback.textContent = watchedState.errors.input;
       } else {
         $('.form-control').removeClass('is-invalid');

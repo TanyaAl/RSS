@@ -22,7 +22,7 @@ const renderPosts = (data, elements) => {
         li.setAttribute('id', post.id);
         const button = document.createElement('button');
         button.classList.add('btn', 'view-button', 'btn-outline-primary', 'm-1', 'border-primary', 'position-relative', 'bottom-0', 'end-0');
-        button.textContent = 'View';
+        button.textContent = 'Просмотр';
         button.addEventListener('click', (e) => {
           renderModal(post, e);
           // console.log('renderModal done');
@@ -33,7 +33,5 @@ const renderPosts = (data, elements) => {
       }
     });
   });
-  elements.feedback.classList.replace('text-danger', 'text-success')
-  elements.feedback.textContent = i18n.t('validation.success');
 };
 export default renderPosts;

@@ -21,7 +21,6 @@ const parseRSS = (data) => {
     title: channel.querySelector('title').textContent,
     description: channel.querySelector('description').textContent,
     items: [...items].map((item) => ({
-      id: _.uniqueId(),
       title: item.querySelector('title').textContent,
       description: item.querySelector('description').textContent.replace(/<\/?[^>]+(>|$)/g, '').replace(/&nbsp;/g, ' '),
       link: item.querySelector('link').textContent,

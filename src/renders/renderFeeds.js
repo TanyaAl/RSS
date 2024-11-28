@@ -1,4 +1,6 @@
-const renderFeeds = (data) => {
+import i18n from "../locales/init";
+
+const renderFeeds = (data, elements) => {
   // console.log('data', data);
   const ul = document.querySelector('.ul-feeds');
   const li = document.createElement('li');
@@ -9,10 +11,11 @@ const renderFeeds = (data) => {
   li.append(h4);
   li.append(description);
   ul.prepend(li);
-  // feeds.prepend(ul);
   const titles = document.querySelectorAll('.title');
   titles.forEach((title) => title.classList.replace('text-white', 'text-black'));
   // console.log(elements.feeds);
+  elements.feedback.classList.replace('text-danger', 'text-success')
+  elements.feedback.textContent = i18n.t('validation.success');
 };
 
 export default renderFeeds;

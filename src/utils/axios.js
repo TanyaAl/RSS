@@ -16,11 +16,16 @@ const getData = (watchedState, elements) => {
       const actualFeeds = watchedState.rssForm.feeds;
       const newFeed = { url: feedUrl, ...parsedFeed };
       const exists = actualFeeds.some((obj) => obj.url === newFeed.url);
-      const items = actualFeeds.some((obj) => _.isEqual(obj.items, newFeed.items));
+      const items = actualFeeds.some((obj) => obj.items.title === newFeed.items.title);
+      if (exists && items) {
+        watchedState.errors = i18n.t('validation.doubleUrl'); 
+       
+        // console.log(exists && items);
+      }
       if (!exists) {
         watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
         renderPosts(watchedState.rssForm.feeds, elements);
-        renderFeeds(watchedState.rssForm.feeds);
+        renderFeeds(watchedState.rssForm.feeds, elements);
       }
       if (exists && !items) {
         const newItems = watchedState.rssForm.feeds.find((obj) => obj.url === newFeed.url);
@@ -39,8 +44,8 @@ const getData = (watchedState, elements) => {
     .finally(() => {
       elements.submit.disabled = false;
     });
-  setTimeout(() => getData(watchedState, elements), 5000);
-  // console.log('timeout done');
-};
+    // console.log('timeout done');
+    // setTimeout(() => getData(watchedState, elements), 5000);
+  };
 
 export default getData;
