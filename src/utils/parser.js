@@ -1,4 +1,4 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 
 const getAllOriginsUrl = (url) => {
   const allOriginsEndpoint = 'https://allorigins.hexlet.app/get';
