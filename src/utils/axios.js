@@ -38,7 +38,7 @@ const getData = (watchedState, elements) => {
       elements.field.focus();
     })
     .catch(() => {
-      watchedState.errors = i18n.t('validation.network');
+      watchedState.errors = i18n.t('network.network');
     })
     .finally(() => {
       elements.submit.disabled = false;

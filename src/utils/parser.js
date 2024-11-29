@@ -24,7 +24,6 @@ const parseRSS = (data) => {
       title: item.querySelector('title').textContent,
       description: item.querySelector('description').textContent.replace(/<\/?[^>]+(>|$)/g, '').replace(/&nbsp;/g, ' '),
       link: item.querySelector('link').textContent,
-      ui_state: 'unseen',
     })),
   };
   // console.log('feed', feed);

@@ -5,6 +5,9 @@
         "correctURL": "Invalid RSS URL. Please check the format and try again",
         "doubleUrl": "This RSS feed has already been added",
         "success": "RSS uploaded successfully",
+        "validRSS": "The resource does not contain a valid RSS feed"
+      },
+      "network": {
         "network": "network error"
       }
     }

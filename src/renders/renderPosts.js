@@ -1,5 +1,4 @@
 import renderModal from './renderModal';
-// import i18n from '../locales/init';
 
 const renderPosts = (data, elements) => {
   const ul = document.querySelector('.ul-posts');
