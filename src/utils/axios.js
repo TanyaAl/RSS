@@ -44,7 +44,7 @@ const getData = (watchedState, elements) => {
       elements.submit.disabled = false;
     });
   // console.log('timeout done');
-  // setTimeout(() => getData(watchedState, elements), 5000);
+  setTimeout(() => getData(watchedState, elements), 5000);
 };
 
 export default getData;

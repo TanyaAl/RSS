@@ -49,15 +49,15 @@ const app = () => {
       .required()
       .url()
       .notOneOf(watchedState.rssForm.feeds.map((feed) => feed.url))
-      .test('isValidRSS', function (value) {
-        return isValidRSS(value).then((isValidRSS) => {
-          if (!isValidRSS) {
-            return this.createError({ message: i18n.t('validation.validRSS') });
-          }
-          return true;
-        });
-      },
-    )
+      // .test('isValidRSS', function (value) {
+      //   return isValidRSS(value).then((isValidRSS) => {
+      //     if (!isValidRSS) {
+      //       return this.createError({ message: i18n.t('validation.validRSS') });
+      //     }
+      //     return true;
+      //   });
+      // },
+    // )
   });
 
   const validate = (field) => {
