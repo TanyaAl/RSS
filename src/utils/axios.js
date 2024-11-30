@@ -24,7 +24,6 @@ const getData = (watchedState, elements) => {
         handleParsingError(watchedState, 'validation.inValidRSS');
         return;
       }
-      // console.log('parsedFeed', parsedFeed);
       const actualFeeds = watchedState.rssForm.feeds;
       const newFeed = { url: feedUrl, ...parsedFeed };
       const exists = actualFeeds.some((obj) => obj.url === newFeed.url);
@@ -45,13 +44,11 @@ const getData = (watchedState, elements) => {
     })
     .catch(() => {
       handleParsingError(watchedState, i18n.t('network'));
-      // console.error('Network error:', err);
     })
     .finally(() => {
       const { submit } = elements;
       submit.disabled = false;
     });
-  // console.log('timeout done');
   // setTimeout(() => getData(watchedState, elements), 5000);
 };
 

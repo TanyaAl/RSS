@@ -55,7 +55,6 @@ const app = () => {
       .then(() => ({}))
       .catch((err) => {
         const errors = {};
-        // console.log('err', err.name);
         err.inner.forEach((error) => {
           errors[error.path] = error.message;
         });
@@ -66,23 +65,14 @@ const app = () => {
   elements.field.addEventListener('input', (e) => {
     e.preventDefault();
     watchedState.rssForm.currentFeed = { submit: e.target.value.trim().toLowerCase() };
-    // validate(watchedState.rssForm.currentFeed).then((errors) => {
-    // console.log(watchedState.rssForm.currentFeed);
-    // watchedState.errors = errors;
-    // console.log('errors', watchedState.errors);
-    // watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
-    // });
   });
 
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
-    // console.log(e.target);
     elements.submit.disabled = true;
-    // watchedState.rssForm.currentFeed = { input: e.target.value.trim().toLowerCase() };
 
     validate(watchedState.rssForm.currentFeed).then((errors) => {
       watchedState.errors = errors;
-      // console.log('Validation errors:', errors);
       watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
       if (watchedState.rssForm.stateForm !== 'valid') {
         elements.submit.disabled = false;
@@ -90,7 +80,6 @@ const app = () => {
     });
     getData(watchedState, elements);
   });
-  // console.log('errors', watchedState.errors);
 };
 
 export default app;

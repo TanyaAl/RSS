@@ -7,9 +7,7 @@ const parseRSS = (data) => {
   const parser = new DOMParser();
   const xml = parser.parseFromString(data, 'application/xml');
   const parseError = xml.querySelector('parsererror');
-  // console.log('parseerror', parseError);
   if (parseError) {
-    // console.log('name', parseError.name);
     throw new Error('invalid data');
   }
 
