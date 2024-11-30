@@ -15,7 +15,7 @@ const renderPosts = (data, elements) => {
         li.setAttribute('title', post.title);
         const link = document.createElement('a');
         link.textContent = post.title;
-        link.classList.add('text-wrap', 'flex-grow-1', 'fw-bold');
+        link.classList.add('fw-bold');
         link.setAttribute('href', '#');
         li.append(link);
         li.setAttribute('id', post.id);
