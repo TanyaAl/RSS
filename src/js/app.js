@@ -4,8 +4,6 @@ import onChange from 'on-change';
 import i18n from '../locales/init';
 import renderErrors from '../renders/renderErrors';
 import getData from '../utils/axios';
-import isRSSFeed from '../utils/isValidRSS';
-import { parseRSS } from '../utils/parser';
 
 const app = () => {
   const state = {
@@ -48,17 +46,7 @@ const app = () => {
       .string()
       .required()
       .url()
-      .notOneOf(watchedState.rssForm.feeds.map((feed) => feed.url))
-    //   .test('isValidRSS', 'WOW', (value) => {
-    //     isRSSFeed(value);
-    //     console.log('value', value)
-    //     console.log(watchedState.errors)
-    //   //   if (!parseRSS(value)) {
-    //   //     return false;
-    //   //   }
-    //   //   return true;
-    //   }
-    // ),
+      .notOneOf(watchedState.rssForm.feeds.map((feed) => feed.url)),
   });
 
   const validate = (field) => {
@@ -67,7 +55,7 @@ const app = () => {
       .then(() => ({}))
       .catch((err) => {
         const errors = {};
-        console.log('err', err);
+        // console.log('err', err.name);
         err.inner.forEach((error) => {
           errors[error.path] = error.message;
         });
@@ -79,32 +67,30 @@ const app = () => {
     e.preventDefault();
     watchedState.rssForm.currentFeed = { submit: e.target.value.trim().toLowerCase() };
     // validate(watchedState.rssForm.currentFeed).then((errors) => {
-      // console.log(watchedState.rssForm.currentFeed);
-      // watchedState.errors = errors;
-      // console.log('errors', watchedState.errors);
-      // watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
+    // console.log(watchedState.rssForm.currentFeed);
+    // watchedState.errors = errors;
+    // console.log('errors', watchedState.errors);
+    // watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
     // });
-  }); 
+  });
 
   elements.form.addEventListener('submit', (e) => {
-    e.preventDefault(); 
-    console.log(e.target)        
+    e.preventDefault();
+    // console.log(e.target);
     elements.submit.disabled = true;
     // watchedState.rssForm.currentFeed = { input: e.target.value.trim().toLowerCase() };
 
     validate(watchedState.rssForm.currentFeed).then((errors) => {
-          watchedState.errors = errors;
+      watchedState.errors = errors;
       // console.log('Validation errors:', errors);
       watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
-
       if (watchedState.rssForm.stateForm !== 'valid') {
         elements.submit.disabled = false;
-        return;
       }
-      getData(watchedState, elements);
     });
+    getData(watchedState, elements);
   });
-  console.log('errors', watchedState.errors);
+  // console.log('errors', watchedState.errors);
 };
 
 export default app;

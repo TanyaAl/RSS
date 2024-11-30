@@ -4,6 +4,11 @@ import { getAllOriginsUrl, parseRSS } from './parser';
 import renderFeeds from '../renders/renderFeeds';
 import renderPosts from '../renders/renderPosts';
 
+const handleParsingError = (watchedState, i18nKey) => {
+  watchedState.errors = { submit: i18n.t(i18nKey) };
+  // console.log('hand', watchedState.errors);
+};
+
 const getData = (watchedState, elements) => {
   const feedUrl = watchedState.rssForm.currentFeed.submit;
   const proxyUrl = getAllOriginsUrl(feedUrl);
@@ -11,16 +16,18 @@ const getData = (watchedState, elements) => {
   axios.get(proxyUrl)
     .then((response) => {
       const { contents } = response.data;
-      console.log('head', response.headers)
-      const parsedFeed = parseRSS(contents);
-      console.log('parsedFeed', parsedFeed)
+      let parsedFeed;
+      try {
+        parsedFeed = parseRSS(contents);
+      } catch {
+        handleParsingError(watchedState, 'validation.inValidRSS');
+        return;
+      }
+      // console.log('parsedFeed', parsedFeed);
       const actualFeeds = watchedState.rssForm.feeds;
       const newFeed = { url: feedUrl, ...parsedFeed };
       const exists = actualFeeds.some((obj) => obj.url === newFeed.url);
       const items = actualFeeds.some((obj) => obj.items.title === newFeed.items.title);
-      if (exists && items) {
-        watchedState.errors = i18n.t('validation.doubleUrl');
-      }
       if (!exists) {
         watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
         renderPosts(watchedState.rssForm.feeds, elements);
@@ -34,12 +41,12 @@ const getData = (watchedState, elements) => {
           )))];
         renderPosts(watchedState.rssForm.feeds, elements);
       }
-      elements.form.reset();
-      elements.field.focus();
+      // elements.form.reset();
+      // elements.field.focus();
     })
     .catch(() => {
-      watchedState.errors = i18n.t('network');
-      console.log('axious', watchedState.errors)
+      handleParsingError(watchedState, i18n.t('network'));
+      // console.error('Network error:', err);
     })
     .finally(() => {
       elements.submit.disabled = false;

@@ -6,7 +6,7 @@ const renderErrors = (watchedState, path, value, elements) => {
       if (Object.keys(watchedState.errors).length !== 0) {
         $('.form-control').addClass('is-invalid');
         elements.feedback.classList.replace('text-success', 'text-danger');
-        console.log('view', value);
+        // console.log('view', value);
         elements.feedback.textContent = value.submit;
       } else {
         $('.form-control').removeClass('is-invalid');

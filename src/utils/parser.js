@@ -1,4 +1,3 @@
-
 const getAllOriginsUrl = (url) => {
   const allOriginsEndpoint = 'https://allorigins.hexlet.app/get';
   return `${allOriginsEndpoint}?disableCache=true&url=${encodeURIComponent(url)}`;
@@ -7,10 +6,10 @@ const getAllOriginsUrl = (url) => {
 const parseRSS = (data) => {
   const parser = new DOMParser();
   const xml = parser.parseFromString(data, 'application/xml');
-  // console.log( 'xml', xml)
   const parseError = xml.querySelector('parsererror');
-  console.log('parseerror', parseError)
+  // console.log('parseerror', parseError);
   if (parseError) {
+    // console.log('name', parseError.name);
     throw new Error('invalid data');
   }
 

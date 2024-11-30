@@ -32,5 +32,7 @@ const renderPosts = (data, elements) => {
       }
     });
   });
+  elements.form.reset();
+  elements.field.focus();
 };
 export default renderPosts;
