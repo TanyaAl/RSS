@@ -1,19 +1,15 @@
-import axios from "axios";
-
-const isValidRSS = (value) => {
-    return axios 
-    .get(value)
-    .then((response) => {
-        const contentType = response.headers['content-type'];
-        if (contentType.includes('xml')) {
-            return false;
-        }
-        const parser = new DOMParser(contentType);
-        const doc = parser.parseFromString(response.data, 'text/xml');
-        const rss = doc.querySelector('rss');
-        return !!rss;
-    })
-    .catch(() => false);
-};
-
-export default isValidRSS;
+function isRSSFeed(url) {
+    return fetch(url)
+      .then((response) => {
+ 
+        return response.text().then((text) => {
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(text, 'application/xml');
+  
+          // Проверяем наличие обязательных тегов RSS
+          return !!xmlDoc.querySelector('rss') || !!xmlDoc.querySelector('feed');
+        });
+      })
+      .catch(() => false); // Возвращаем false при ошибке
+  }
+export default isRSSFeed;  

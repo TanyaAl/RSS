@@ -2,10 +2,10 @@ import * as yup from 'yup';
 import _ from 'lodash';
 import onChange from 'on-change';
 import i18n from '../locales/init';
-import initView from './view';
+import renderErrors from '../renders/renderErrors';
 import getData from '../utils/axios';
-import isValidRSS from '../utils/isValidRSS';
-// import validate from '../utils/yup';
+import isRSSFeed from '../utils/isValidRSS';
+import { parseRSS } from '../utils/parser';
 
 const app = () => {
   const state = {
@@ -30,7 +30,7 @@ const app = () => {
 
   const watchedState = onChange(
     state,
-    (path, value) => initView(watchedState, path, value, elements),
+    (path, value) => renderErrors(watchedState, path, value, elements),
   );
 
   yup.setLocale({
@@ -44,20 +44,21 @@ const app = () => {
   });
 
   const getSchema = () => yup.object().shape({
-    input: yup
+    submit: yup
       .string()
       .required()
       .url()
       .notOneOf(watchedState.rssForm.feeds.map((feed) => feed.url))
-      // .test('isValidRSS', function (value) {
-      //   return isValidRSS(value).then((isValidRSS) => {
-      //     if (!isValidRSS) {
-      //       return this.createError({ message: i18n.t('validation.validRSS') });
-      //     }
-      //     return true;
-      //   });
-      // },
-    // )
+    //   .test('isValidRSS', 'WOW', (value) => {
+    //     isRSSFeed(value);
+    //     console.log('value', value)
+    //     console.log(watchedState.errors)
+    //   //   if (!parseRSS(value)) {
+    //   //     return false;
+    //   //   }
+    //   //   return true;
+    //   }
+    // ),
   });
 
   const validate = (field) => {
@@ -66,9 +67,8 @@ const app = () => {
       .then(() => ({}))
       .catch((err) => {
         const errors = {};
+        console.log('err', err);
         err.inner.forEach((error) => {
-          // console.log('path', error.path);
-          // console.log('error', error);
           errors[error.path] = error.message;
         });
         return errors;
@@ -77,24 +77,26 @@ const app = () => {
 
   elements.field.addEventListener('input', (e) => {
     e.preventDefault();
-    watchedState.rssForm.currentFeed = { input: e.target.value.trim().toLowerCase() };
-    validate(watchedState.rssForm.currentFeed).then((errors) => {
+    watchedState.rssForm.currentFeed = { submit: e.target.value.trim().toLowerCase() };
+    // validate(watchedState.rssForm.currentFeed).then((errors) => {
       // console.log(watchedState.rssForm.currentFeed);
-      watchedState.errors = errors;
-      console.log('errors', watchedState.errors);
-      watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
-    });
-  });
+      // watchedState.errors = errors;
+      // console.log('errors', watchedState.errors);
+      // watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
+    // });
+  }); 
 
   elements.form.addEventListener('submit', (e) => {
-    e.preventDefault();         
+    e.preventDefault(); 
+    console.log(e.target)        
     elements.submit.disabled = true;
+    // watchedState.rssForm.currentFeed = { input: e.target.value.trim().toLowerCase() };
+
     validate(watchedState.rssForm.currentFeed).then((errors) => {
-      // console.log('1', typeof watchedState.rssForm.currentFeed.input);
-      // console.log('2', watchedState.rssForm.feeds.map(feed => typeof feed.url))
-      watchedState.errors = errors;
-      console.log('Validation errors:', errors);
-      console.log('Current feed:', watchedState.rssForm.currentFeed);
+          watchedState.errors = errors;
+      // console.log('Validation errors:', errors);
+      watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
+
       if (watchedState.rssForm.stateForm !== 'valid') {
         elements.submit.disabled = false;
         return;

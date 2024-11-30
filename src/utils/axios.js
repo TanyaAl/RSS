@@ -5,21 +5,21 @@ import renderFeeds from '../renders/renderFeeds';
 import renderPosts from '../renders/renderPosts';
 
 const getData = (watchedState, elements) => {
-  const feedUrl = watchedState.rssForm.currentFeed.input;
+  const feedUrl = watchedState.rssForm.currentFeed.submit;
   const proxyUrl = getAllOriginsUrl(feedUrl);
 
   axios.get(proxyUrl)
     .then((response) => {
       const { contents } = response.data;
+      console.log('head', response.headers)
       const parsedFeed = parseRSS(contents);
+      console.log('parsedFeed', parsedFeed)
       const actualFeeds = watchedState.rssForm.feeds;
       const newFeed = { url: feedUrl, ...parsedFeed };
       const exists = actualFeeds.some((obj) => obj.url === newFeed.url);
       const items = actualFeeds.some((obj) => obj.items.title === newFeed.items.title);
       if (exists && items) {
         watchedState.errors = i18n.t('validation.doubleUrl');
-
-        // console.log(exists && items);
       }
       if (!exists) {
         watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
@@ -38,13 +38,14 @@ const getData = (watchedState, elements) => {
       elements.field.focus();
     })
     .catch(() => {
-      watchedState.errors = i18n.t('network.network');
+      watchedState.errors = i18n.t('network');
+      console.log('axious', watchedState.errors)
     })
     .finally(() => {
       elements.submit.disabled = false;
     });
   // console.log('timeout done');
-  setTimeout(() => getData(watchedState, elements), 5000);
+  // setTimeout(() => getData(watchedState, elements), 5000);
 };
 
 export default getData;

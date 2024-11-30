@@ -1,4 +1,3 @@
-// import _ from 'lodash';
 
 const getAllOriginsUrl = (url) => {
   const allOriginsEndpoint = 'https://allorigins.hexlet.app/get';
@@ -8,10 +7,11 @@ const getAllOriginsUrl = (url) => {
 const parseRSS = (data) => {
   const parser = new DOMParser();
   const xml = parser.parseFromString(data, 'application/xml');
-
+  // console.log( 'xml', xml)
   const parseError = xml.querySelector('parsererror');
+  console.log('parseerror', parseError)
   if (parseError) {
-    throw new Error('Invalid RSS');
+    throw new Error('invalid data');
   }
 
   const channel = xml.querySelector('channel');
@@ -26,8 +26,6 @@ const parseRSS = (data) => {
       link: item.querySelector('link').textContent,
     })),
   };
-  // console.log('feed', feed);
   return feed;
 };
-
 export { getAllOriginsUrl, parseRSS };
