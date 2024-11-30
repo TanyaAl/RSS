@@ -55,7 +55,7 @@ const config = {
       message: /homepage/,
     },
     /warning from compiler/,
-    (warning) => true,
+    () => true,
   ],
 };
 

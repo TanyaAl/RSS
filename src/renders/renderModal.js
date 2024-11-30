@@ -1,4 +1,4 @@
-import getModal from '../utils/getModal';
+import getModal from '../utils/getModal.js';
 
 const renderModal = (data, e) => {
   // console.log('dataItems', data);
