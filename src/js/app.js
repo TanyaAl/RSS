@@ -74,11 +74,12 @@ const app = () => {
     validate(watchedState.rssForm.currentFeed).then((errors) => {
       watchedState.errors = errors;
       watchedState.rssForm.stateForm = _.isEmpty(watchedState.errors) ? 'valid' : 'invalid';
-      if (watchedState.rssForm.stateForm !== 'valid') {
+      if (watchedState.rssForm.stateForm === 'valid') {
+        getData(watchedState, elements);
+      } else {
         elements.submit.disabled = false;
       }
     });
-    getData(watchedState, elements);
   });
 };
 
