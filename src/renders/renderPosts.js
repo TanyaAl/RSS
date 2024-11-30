@@ -1,4 +1,4 @@
-import renderModal from './renderModal';
+import renderModal from './renderModal.js';
 
 const renderPosts = (data, elements) => {
   const ul = document.querySelector('.ul-posts');

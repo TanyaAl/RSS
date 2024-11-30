@@ -1,4 +1,4 @@
-import i18n from '../locales/init';
+import i18n from '../locales/init.js';
 
 const renderFeeds = (data, elements) => {
   // console.log('data', data);
@@ -14,8 +14,9 @@ const renderFeeds = (data, elements) => {
   const titles = document.querySelectorAll('.title');
   titles.forEach((title) => title.classList.replace('text-white', 'text-black'));
   // console.log(elements.feeds);
-  elements.feedback.classList.replace('text-danger', 'text-success');
-  elements.feedback.textContent = i18n.t('validation.success');
+  const { feedback } = elements;
+  feedback.classList.replace('text-danger', 'text-success');
+  feedback.textContent = i18n.t('validation.success');
 };
 
 export default renderFeeds;

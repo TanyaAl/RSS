@@ -1,9 +1,9 @@
 import * as yup from 'yup';
 import _ from 'lodash';
 import onChange from 'on-change';
-import i18n from '../locales/init';
-import renderErrors from '../renders/renderErrors';
-import getData from '../utils/axios';
+import i18n from '../locales/init.js';
+import renderErrors from '../renders/renderErrors.js';
+import getData from '../utils/axios.js';
 
 const app = () => {
   const state = {

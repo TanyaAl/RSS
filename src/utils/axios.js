@@ -1,12 +1,13 @@
 import axios from 'axios';
-import i18n from '../locales/init';
-import { getAllOriginsUrl, parseRSS } from './parser';
-import renderFeeds from '../renders/renderFeeds';
-import renderPosts from '../renders/renderPosts';
+import i18n from '../locales/init.js';
+import { getAllOriginsUrl, parseRSS } from './parser.js';
+import renderFeeds from '../renders/renderFeeds.js';
+import renderPosts from '../renders/renderPosts.js';
 
 const handleParsingError = (watchedState, i18nKey) => {
-  watchedState.errors = { submit: i18n.t(i18nKey) };
-  // console.log('hand', watchedState.errors);
+  const updatedErrors = { submit: i18n.t(i18nKey) };
+  const newState = { ...watchedState, errors: updatedErrors };
+  Object.assign(watchedState, newState);
 };
 
 const getData = (watchedState, elements) => {
@@ -41,15 +42,14 @@ const getData = (watchedState, elements) => {
           )))];
         renderPosts(watchedState.rssForm.feeds, elements);
       }
-      // elements.form.reset();
-      // elements.field.focus();
     })
     .catch(() => {
       handleParsingError(watchedState, i18n.t('network'));
       // console.error('Network error:', err);
     })
     .finally(() => {
-      elements.submit.disabled = false;
+      const { submit } = elements;
+      submit.disabled = false;
     });
   // console.log('timeout done');
   // setTimeout(() => getData(watchedState, elements), 5000);
