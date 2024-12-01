@@ -1,4 +1,4 @@
-import i18n from '../locales/init';
+import i18n from '../locales/init.js';
 
 const handleParsingError = (watchedState, i18nKey) => {
   const updatedErrors = { submit: i18n.t(i18nKey) };
