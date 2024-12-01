@@ -4,6 +4,7 @@ import onChange from 'on-change';
 import i18n from '../locales/init.js';
 import renderErrors from '../renders/renderErrors.js';
 import getData from '../utils/axios.js';
+import updateData from '../utils/updatePosts.js';
 
 const app = () => {
   const state = {
@@ -78,6 +79,9 @@ const app = () => {
         getData(watchedState, elements);
       } else {
         elements.submit.disabled = false;
+      }
+      if (watchedState.rssForm.feeds.length >= 1) {
+        updateData(watchedState, elements);
       }
     });
   });
