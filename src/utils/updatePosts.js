@@ -20,10 +20,16 @@ const updateData = (watchedState, elements) => {
           return;
         }
         const newFeed = { url: feedUrl, ...parsedFeed };
-        const existingPosts = feeds.some((oldFeed) => oldFeed.items.url === newFeed.items.url);
+        const existingPosts = feeds.some(
+          (oldFeed) => oldFeed.items.some(
+            (item1) => newFeed.items.some(
+              (item2) => item1.link === item2.link,
+            ),
+          ),
+        );
         if (!existingPosts) {
           const newPosts = newFeed.items.filter(
-            (post) => post.items.some((item) => item.link === post.link),
+            (item1) => !feed.items.some((item2) => item1.link === item2.link),
           );
           const updatedPosts = feeds.map((f) => (
             f.url === feed.url
