@@ -13,9 +13,10 @@ const renderPosts = (data, elements) => {
         const link = document.createElement('a');
         link.textContent = post.title;
         link.classList.add('fw-bold');
-        link.setAttribute('href', '#');
+        link.setAttribute('href', post.link);
         li.append(link);
-        li.setAttribute('id', post.id);
+        link.addEventListener('click', (e) => e.preventDefault());
+
         const button = document.createElement('button');
         button.classList.add('btn', 'view-button', 'btn-outline-primary', 'm-1', 'border-primary', 'position-relative', 'bottom-0', 'end-0');
         button.textContent = 'Просмотр';

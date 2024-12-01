@@ -49,7 +49,6 @@ const getData = (watchedState, elements) => {
       const { submit } = elements;
       submit.disabled = false;
     });
-  // setTimeout(() => getData(watchedState, elements), 5000);
 };
 
 export default getData;

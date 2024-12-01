@@ -23,6 +23,7 @@ const parseRSS = (data) => {
       link: item.querySelector('link').textContent,
     })),
   };
+  console.log(feed)
   return feed;
 };
 export { getAllOriginsUrl, parseRSS };

@@ -10,5 +10,10 @@ const renderModal = (data, e) => {
   const modal = document.querySelector('.modal');
   e.target.previousSibling.classList.replace('fw-bold', 'fw-normal');
   getModal(modal);
+
+  const open = document.querySelector('.open');
+  const parentPost = document.querySelector(`[title="${modalTitle.textContent}"]`);
+  const parentLink = parentPost.querySelector('a');
+  open.addEventListener('click', () => window.open(parentLink.href, '_blank'));
 };
 export default renderModal;
