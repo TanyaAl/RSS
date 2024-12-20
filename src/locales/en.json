@@ -9,6 +9,15 @@
       },
       "network": {
         "network": "network error"
+      },
+      "interface_texts": {
+        "rss-aggregator": "RSS-aggregator",
+        "start-reading": "Start reading RSS today! It's easy, it's beautiful.",
+        "rss-link": "RSS link",
+        "add-link": "Add",
+        "link-example": "Example: https://lorem-rss.hexlet.app/feed",
+        "title-posts": "Posts",
+        "title-feeds": "Feeds"
       }
     }
   }

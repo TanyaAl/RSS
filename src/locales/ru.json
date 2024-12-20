@@ -7,6 +7,15 @@
         "success": "RSS успешно загружен",
         "inValidRSS": "Ресурс не содержит валидный RSS"
       },
-      "network": "Ошибка сети"
+      "network": "Ошибка сети",
+      "interface_texts": {
+        "rss-aggregator": "RSS-агрегатор",
+        "start-reading": "Начните читать RSS сегодня! Это легко, это красиво.",
+        "rss-link": "Ссылка RSS",
+        "add-link": "Добавить",
+        "link-example": "Пример: https://lorem-rss.hexlet.app/feed",
+        "title-posts": "Посты",
+        "title-feeds": "Фиды"
+      }
     }
   }

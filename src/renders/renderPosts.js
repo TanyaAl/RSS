@@ -13,7 +13,8 @@ const renderPosts = (data, elements) => {
         const link = document.createElement('a');
         link.textContent = post.title;
         link.classList.add('fw-bold');
-        link.setAttribute('href', post.link);
+        const postLink = post.link;
+        link.href = new URL(postLink).toString();
         li.append(link);
         link.addEventListener('click', (e) => e.preventDefault());
 

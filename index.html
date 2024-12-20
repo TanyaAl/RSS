@@ -11,21 +11,21 @@
         <section class="container-fluid bg-dark p-5">
             <div class="row">
                 <div class="col-md-10 col-lg-8 mx-auto text-white">
-                    <h1 class="display-3 mb-0">RSS агрегатор</h1>
-                    <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
+                    <h1 class="display-3 mb-0 rss-aggregator"></h1>
+                    <p class="lead start-reading"></p>
                     <form id="rss-form" action="" class="rss-form text-body">
                         <div class="row">
                             <div class="col">
                                 <div class="form-floating"><input id="url-input" autofocus="" required="" name="url"
                                         aria-label="url" class="form-control w-100" placeholder="ссылка RSS"
-                                        autocomplete="off"> <label for="url-input">Ссылка RSS</label></div>
+                                        autocomplete="off"> <label for="url-input" class="rss-link"></label></div>
                             </div>
                             <div class="col-auto">
                                 <button id="rss-submit" type="submit" aria-label="add"
-                                    class="h-100 btn btn-lg btn-primary px-sm-5">Добавить</button></div>
+                                    class="h-100 btn btn-lg btn-primary px-sm-5 add-link"></button></div>
                         </div>
                     </form>
-                    <p class="mt-2 mb-0 text-secondary">Пример: https://lorem-rss.hexlet.app/feed</p>
+                    <p class="mt-2 mb-0 text-secondary link-example"></p>
                     <p class="feedback m-0 position-absolute small text-danger"></p>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <div class="col-md-10 col-lg-8 order-1 mx-auto posts">
                     <div class="card border-0">
                         <div class="card-body">
-                            <div class="card-title"><h2 class="title text-white">Посты</h2></div>
+                            <div class="card-title"><h2 class="title text-white title-posts"></h2></div>
                         </div>
                         <ul class="ul-posts list-group"></ul>
                     </div>
@@ -43,7 +43,7 @@
                 <div class="col-md-10 col-lg-4 mx-auto order-0 order-lg-1 feeds">
                     <div class="card border-0">
                         <div class="card-body">
-                            <div class="text-start"><h2 class="title text-white">Фиды</h2></div>
+                            <div class="text-start"><h2 class="title text-white title-feeds"></h2></div>
                         </div>
                         <ul class="ul-feeds list-group"></ul>
                     </div>

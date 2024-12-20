@@ -5,6 +5,7 @@ import i18n from '../locales/init.js';
 import renderErrors from '../renders/renderErrors.js';
 import getData from '../utils/axios.js';
 import updateData from '../utils/updatePosts.js';
+import setInterfaceLanguages from '../utils/setInterfaceLanguages.js';
 
 const app = () => {
   const state = {
@@ -25,7 +26,18 @@ const app = () => {
       return document.querySelectorAll('.post');
     },
     feeds: document.querySelector('.feeds'),
+    texts: {
+      rss_aggregator: document.querySelector('.rss-aggregator'),
+      start_reading: document.querySelector('.start-reading'),
+      rss_link: document.querySelector('.rss-link'),
+      add_link: document.querySelector('.add-link'),
+      link_example: document.querySelector('.link-example'),
+      title_posts: document.querySelector('.title-posts'),
+      title_feeds: document.querySelector('.title-feeds'),
+    },
   };
+
+  setInterfaceLanguages(elements);
 
   const watchedState = onChange(
     state,
