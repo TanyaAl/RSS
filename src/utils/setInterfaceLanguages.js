@@ -1,4 +1,4 @@
-import i18n from '../locales/init';
+import i18n from '../locales/init.js';
 
 const setInterfaceLanguages = (elements) => {
   const { texts } = elements;
