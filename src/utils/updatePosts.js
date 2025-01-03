@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { getAllOriginsUrl, parseRSS } from './parser.js';
-import renderPosts from '../renders/renderPosts.js';
 import handleParsingError from './addTextForNotValidateErrors.js';
 
 const updateData = (watchedState, elements) => {
