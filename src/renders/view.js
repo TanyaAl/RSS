@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import renderFeeds from './renderFeeds';
-import renderPosts from './renderPosts';
+import renderFeeds from './renderFeeds.js';
+import renderPosts from './renderPosts.js';
 
 const view = (watchedState, path, value, elements) => {
   const { feedback } = elements;

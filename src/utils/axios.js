@@ -12,7 +12,6 @@ const getData = (watchedState, elements) => {
       let parsedFeed;
       try {
         parsedFeed = parseRSS(contents);
-        console.log('parsed', parsedFeed);
       } catch {
         handleParsingError(watchedState, 'validation.inValidRSS');
         return;
@@ -23,8 +22,9 @@ const getData = (watchedState, elements) => {
       const items = actualFeeds.some((obj) => obj.items.title === newFeed.items.title);
       if (!exists) {
         watchedState.rssForm.feeds.push({ url: feedUrl, ...parsedFeed });
-        watchedState.rssForm.addedLink = { url: feedUrl, ...parsedFeed };
-        console.log('addedLinkNew', watchedState.rssForm.addedLink);
+        Object.assign(watchedState.rssForm, {
+          addedLink: { url: feedUrl, ...parsedFeed },
+        });
       }
       if (exists && !items) {
         const newItems = watchedState.rssForm.feeds.find((obj) => obj.url === newFeed.url);
@@ -35,7 +35,6 @@ const getData = (watchedState, elements) => {
       }
     })
     .catch(() => {
-      console.log('catch!!!');
       handleParsingError(watchedState, 'network');
     })
     .finally(() => {
