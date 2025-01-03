@@ -38,8 +38,6 @@ const updateData = (watchedState, elements) => {
           ));
           const updatedState = { ...watchedState, items: updatedPosts };
           Object.assign(watchedState, updatedState);
-
-          renderPosts(watchedState.rssForm.feeds, elements);
         }
       })
       .catch(() => {
