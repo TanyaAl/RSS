@@ -1,6 +1,7 @@
 import renderModal from './renderModal.js';
 
 const renderPosts = (data, elements) => {
+  // console.log('dataPosts', data)
   const ul = document.querySelector('.ul-posts');
   const oldPosts = Array.from(elements.posts);
   data.forEach((obj) => {
@@ -13,8 +14,8 @@ const renderPosts = (data, elements) => {
         const link = document.createElement('a');
         link.textContent = post.title;
         link.classList.add('fw-bold');
-        const postLink = post.link;
-        link.href = new URL(postLink).toString();
+        const postLink = new URL(post.link);
+        link.href = postLink.toString();
         li.append(link);
         link.addEventListener('click', (e) => e.preventDefault());
 

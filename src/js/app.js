@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import _ from 'lodash';
 import onChange from 'on-change';
 import i18n from '../locales/init.js';
-import renderErrors from '../renders/renderErrors.js';
+import view from '../renders/view.js';
 import getData from '../utils/axios.js';
 import updateData from '../utils/updatePosts.js';
 import setInterfaceLanguages from '../utils/setInterfaceLanguages.js';
@@ -13,6 +13,7 @@ const app = () => {
       stateForm: 'invalid',
       feeds: [],
       currentFeed: '',
+      addedLink: '',
     },
     errors: {},
   };
@@ -41,7 +42,9 @@ const app = () => {
 
   const watchedState = onChange(
     state,
-    (path, value) => renderErrors(watchedState, path, value, elements),
+    (path, value) => {
+      view(watchedState, path, value, elements);
+    },
   );
 
   yup.setLocale({

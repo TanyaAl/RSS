@@ -1,6 +1,8 @@
 import $ from 'jquery';
+import renderFeeds from './renderFeeds';
+import renderPosts from './renderPosts';
 
-const renderErrors = (watchedState, path, value, elements) => {
+const view = (watchedState, path, value, elements) => {
   const { feedback } = elements;
   switch (path) {
     case 'errors':
@@ -19,8 +21,14 @@ const renderErrors = (watchedState, path, value, elements) => {
         feedback.textContent = '';
       }
       break;
+    case 'rssForm.addedLink':
+      renderFeeds(watchedState.rssForm.addedLink, elements);
+      break;
+    case 'rssForm.feeds':
+      renderPosts(watchedState.rssForm.feeds, elements);
+      break;
     default:
       break;
   }
 };
-export default renderErrors;
+export default view;
